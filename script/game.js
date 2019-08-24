@@ -1,3 +1,4 @@
+alert('Use any keywords to play the game')
 var cvs = document.getElementById("canvas");
 var ctx = cvs.getContext("2d");
 
@@ -49,7 +50,7 @@ var score = 0;
 // Позиція пташки
 var xPos = 10;
 var yPos = 150;
-var grav = 1.6; // З якою швидкістю падає пташка
+var grav = 1.4; // З якою швидкістю падає пташка
 
 
 // !!! Функція DRAW() яка відповідає за відображення цілої гри на екрані !!!
@@ -79,7 +80,22 @@ function draw() {
  && (yPos <= pipe[i].y + pipeUp.height
  || yPos + bird.height >= pipe[i].y + pipeUp.height + gap) || yPos + bird.height >= cvs.height - fg.height)
   {
- location.reload(); // Перезагрузка страницы
+    ctx.drawImage(fg, 0, cvs.height - fg.height);
+    ctx.drawImage(bird, xPos, yPos);
+
+    ctx.fillStyle = "red";
+    ctx.font = "55px Stencil";
+    ctx.fillText("You LOSE!", 15, cvs.height - 290);
+
+    ctx.fillStyle = "white";
+    ctx.font = "25px Cooper Black";
+    ctx.fillText("Refresh the game", 35, cvs.height - 260);
+
+    ctx.fillStyle = "#333399";
+    ctx.font = "40px Showcard Gothic";
+    ctx.fillText("Score : " + score, 40, cvs.height - 210);
+
+    location.replace(); // Перезагрузка страницы
  }
 
 // Коли проходить колону то додає +1 очко
